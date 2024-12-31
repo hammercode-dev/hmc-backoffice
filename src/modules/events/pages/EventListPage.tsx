@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { formatMoney } from "@/utils/money";
 import {
   Button,
@@ -13,8 +13,13 @@ import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { Outlet, useNavigate } from "react-router-dom";
+import { eventApi } from "@/api/event-api";
 
 const { RangePicker } = DatePicker;
+
+function formatDate(date: string) {
+  return new Date(date).toLocaleDateString();
+}
 
 function SummaryItem({
   title,
@@ -45,6 +50,32 @@ function EventsTable({ events }: { events: TechEvent[] }) {
       key: "title",
     },
     {
+      title: "Harga",
+      key: "price",
+      render: (event: TechEvent) => {
+        if (!event.price) return "Gratis";
+        return formatMoney(event.price);
+      },
+    },
+    {
+      title: "Tanggal",
+      key: "date",
+      render: (event: TechEvent) => {
+        if (event.end_date) {
+          return `${formatDate(event.start_date)} s/d ${formatDate(event.end_date)}`;
+        }
+        return formatDate(event.start_date);
+      },
+    },
+    {
+      title: "Peserta",
+      key: "attendee",
+      render: (event: TechEvent) => {
+        console.log(event)
+        return `${event.attendee}/${event.capacity}`
+      }
+    },
+    {
       title: "Aksi",
       render: () => <button>Lihat</button>,
     },
@@ -56,6 +87,14 @@ function EventsTable({ events }: { events: TechEvent[] }) {
  */
 export default function EventListPage() {
   const navigate = useNavigate();
+  const [events, setEvents] = useState<TechEvent[]>([]);
+
+  useEffect(() => {
+    eventApi.getAll({}).then(({ data }) => {
+      setEvents(data);
+    });
+  }, []);
+
   const [dateRange, setDateRange] = useState<
     [undefined, undefined] | [Dayjs, Dayjs]
   >([dayjs().startOf("d"), dayjs().endOf("d")]);
@@ -75,13 +114,13 @@ export default function EventListPage() {
     }
   };
 
-  const [range, setRange] = useState<string>("today");
+  const [range, setRange] = useState<string>("all_time");
 
   const onRadioChange = (e: RadioChangeEvent) => {
     const val = e.target.value;
     setRange(val);
-    if (val === "today") {
-      setDateRange([dayjs().startOf("d"), dayjs().endOf("d")]);
+    if (val === "all_time") {
+      setDateRange([undefined, undefined]);
     } else if (val === "this_week") {
       setDateRange([dayjs().startOf("week"), dayjs().endOf("week")]);
     } else {
@@ -98,7 +137,7 @@ export default function EventListPage() {
               Acara{" "}
               <Button
                 onClick={() => {
-                    navigate("/admin/events/new");
+                  navigate("/admin/events/new");
                 }}
               >
                 Buat Baru
@@ -110,26 +149,24 @@ export default function EventListPage() {
             <div className="col-span-3">
               <div className="p-4 mb-4 rounded-xl grid grid-cols-3 gap-4 bg-gray-100">
                 <SummaryItem
-                  title={`Total Revenue`}
-                  value={formatMoney(1000000)}
+                  title={`Total Acara`}
+                  value={2}
+                />
+                <SummaryItem
+                  title={`Total Kapasitas`}
+                  value={5000}
                 />
                 <SummaryItem
                   title={`Total Peserta`}
-                  value={formatMoney(12345)}
+                  value={4000}
                 />
               </div>
             </div>
 
             <div className="col-span-2">
               <div className="p-4 mb-4 rounded-xl grid grid-cols-2 gap-4 text-white bg-gradient-to-r from-cyan-500 to-blue-500">
-                <SummaryItem
-                  title={`Income`}
-                  value={formatMoney(800000)}
-                />
-                <SummaryItem
-                  title={`Bill`}
-                  value={formatMoney(200000)}
-                />
+                <SummaryItem title={`Revenue`} value={formatMoney(800000)} />
+                <SummaryItem title={`Bill`} value={formatMoney(200000)} />
               </div>
             </div>
           </div>
@@ -137,10 +174,10 @@ export default function EventListPage() {
           <div className="mb-4">
             <Radio.Group
               onChange={onRadioChange}
-              defaultValue="today"
+              defaultValue="all_time"
               value={range}
             >
-              <Radio value="today">Hari Ini</Radio>
+              <Radio value="all_time">All Time</Radio>
               <Radio value="this_week">Minggu Ini</Radio>
               <Radio value="range">Periode</Radio>
             </Radio.Group>
@@ -157,7 +194,7 @@ export default function EventListPage() {
           </div>
 
           <div className="overflow-x-auto">
-            <EventsTable events={[]} />
+            <EventsTable events={events} />
           </div>
         </div>
       </div>

@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { useState } from "react";
-import { authApi } from "@/api/auth.api";
+import { authApi } from "@/api/auth-api";
 import { RootState } from "@/app/store";
 import { User } from "./auth.entity";
 import { useAppDispatch } from "@/app/hooks";
