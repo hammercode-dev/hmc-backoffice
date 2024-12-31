@@ -50,7 +50,7 @@ export default function EventForm({
           value={formik.values.title}
         />
         {formik.errors.title && formik.touched.title && (
-          <ErrorText message={formik.errors.title} />
+          <ErrorText id="title-error" message={formik.errors.title} />
         )}
       </div>
 
@@ -65,7 +65,7 @@ export default function EventForm({
           min={0}
         />
         {formik.errors.price && formik.touched.price && (
-          <ErrorText message={formik.errors.price} />
+          <ErrorText id="price-error" message={formik.errors.price} />
         )}
       </div>
       <div className="text-right">

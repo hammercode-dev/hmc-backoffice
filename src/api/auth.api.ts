@@ -1,5 +1,5 @@
 import { User } from "../modules/auth/auth.entity";
-import http from "./axios";
+// import http from "./axios";
 
 export type LoginResponse = {
   accessToken: string,
@@ -26,6 +26,8 @@ export const authApi = {
     return Promise.resolve({
       accessToken: 'dummy-token',
       user,
+      email,
+      password,
     })
   },
   getUser(): Promise<ProfileResponse> {

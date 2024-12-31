@@ -13,7 +13,6 @@ import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAuthModule } from "@/modules/auth";
 
 const { RangePicker } = DatePicker;
 
@@ -56,8 +55,6 @@ function EventsTable({ events }: { events: TechEvent[] }) {
  * List of events
  */
 export default function EventListPage() {
-  const { user } = useAuthModule();
-
   const navigate = useNavigate();
   const [dateRange, setDateRange] = useState<
     [undefined, undefined] | [Dayjs, Dayjs]

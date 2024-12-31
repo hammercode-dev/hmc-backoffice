@@ -7,12 +7,13 @@ export default function EditEventPage() {
   const event = undefined
 
   const handleSubmit = (payload: EventFormFields) => {
+    console.log(payload)
     navigate("/admin/events");
   };
 
   return (
     <main className="px-6 py-8">
-      <h1 className="font-bold text-3xl mb-6">Edit Event</h1>
+      <h1 className="font-bold text-3xl mb-6">Edit Event {params.id}</h1>
       <EventForm mode="edit" event={event} onSubmit={handleSubmit} />
     </main>
   );

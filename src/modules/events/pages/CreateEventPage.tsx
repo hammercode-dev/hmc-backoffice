@@ -5,6 +5,7 @@ export default function CreateEventPage() {
   const navigate = useNavigate();
 
   const handleSubmit = (payload: EventFormFields) => {
+    console.log(payload);
     navigate("/admin/events");
   };
 
