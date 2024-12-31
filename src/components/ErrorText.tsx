@@ -1,5 +1,18 @@
-type ErrorTextProps = { message: string };
+import styled from "styled-components";
 
-export default function ErrorText({ message }: ErrorTextProps) {
-  return <p className="text-red-500">{message}</p>;
+const Container = styled.div`
+  color: red;
+`
+
+type InputErrorProps = {
+  /**
+   * The ID of element
+   */
+  id: string
+  message?: string | undefined
+}
+
+export default function ErrorText({ id, message }: InputErrorProps) {
+  if (!message) return null
+  return <Container role="status" aria-label={id} id={id}>{message}</Container>
 }

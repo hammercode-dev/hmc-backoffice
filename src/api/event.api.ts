@@ -1,9 +1,9 @@
-import { GetEventListResponse } from "./event.types";
+import { GetEventListParams, GetEventListResponse } from "./event.types";
 
 export const eventApi = {
-  getAll(params: ): Promise<GetEventListResponse> {
+  getAll(params: GetEventListParams): Promise<GetEventListResponse> {
     return Promise.resolve({
-      events: [],
+      data: [],
       pagination: {
         page: 1,
         total: 2,

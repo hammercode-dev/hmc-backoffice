@@ -6,7 +6,7 @@ export type GetEventListParams = {
 };
 
 export type GetEventListResponse = {
-  events: Array<TechEvent>;
+  data: Array<TechEvent>;
   pagination: {
     page: number;
     total_page: number;
