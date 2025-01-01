@@ -21,7 +21,7 @@ export const eventRoutes: RouteObject[] = [
     element: <CreateEventPage />,
   },
   {
-    path: "events/:id",
+    path: "events/:id/view",
     element: <EventDetailPage />,
   },
   {
