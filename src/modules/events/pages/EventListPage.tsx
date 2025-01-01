@@ -3,6 +3,7 @@ import { formatMoney } from "@/utils/money";
 import {
   Button,
   DatePicker,
+  Flex,
   Radio,
   RadioChangeEvent,
   Table,
@@ -12,7 +13,7 @@ import { TechEvent } from "../event.entity";
 import { ColumnsType } from "antd/es/table";
 import dayjs from "dayjs";
 import type { Dayjs } from "dayjs";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { eventApi } from "@/api/event-api";
 
 const { RangePicker } = DatePicker;
@@ -50,6 +51,11 @@ function EventsTable({ events }: { events: TechEvent[] }) {
       key: "title",
     },
     {
+      title: "Tipe",
+      dataIndex: "type",
+      key: "type",
+    },
+    {
       title: "Harga",
       key: "price",
       render: (event: TechEvent) => {
@@ -71,13 +77,21 @@ function EventsTable({ events }: { events: TechEvent[] }) {
       title: "Peserta",
       key: "attendee",
       render: (event: TechEvent) => {
-        console.log(event)
         return `${event.attendee}/${event.capacity}`
       }
     },
     {
       title: "Aksi",
-      render: () => <button>Lihat</button>,
+      render: (event: TechEvent) => (
+        <Flex gap={10}>
+          <Button size="small" type="primary">
+            <Link to={`/admin/events/${event.id}/edit`}>Edit</Link>
+          </Button>
+          <Button size="small">
+            <Link to={`/admin/events/${event.id}/view`}>Lihat</Link>
+          </Button>
+        </Flex>
+      ),
     },
   ];
   return <Table dataSource={dataSource} columns={columns} />;
@@ -132,12 +146,14 @@ export default function EventListPage() {
     <main className="px-6 w-full py-8">
       <div className="grid grid-cols-12 gap-8">
         <div className="col-span-12">
-          <div className="mb-6 flex justify-between align-center">
-            <h1 className="font-bold text-3xl">
+          <div className="mb-6">
+            <h1 className="font-bold flex justify-between items-center text-3xl">
               Acara{" "}
               <Button
+                size="large"
+                type="primary"
                 onClick={() => {
-                  navigate("/admin/events/new");
+                  navigate("/admin/events/create");
                 }}
               >
                 Buat Baru
