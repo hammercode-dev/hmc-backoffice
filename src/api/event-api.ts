@@ -1,3 +1,5 @@
+// TODO: implement the real API call
+
 import { EventAttendee, TechEvent } from "@/modules/events";
 import { GetEventAttendeeListResponse, GetEventListParams, GetEventListResponse } from "./event-api.types";
 
