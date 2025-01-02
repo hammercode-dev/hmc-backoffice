@@ -1,4 +1,4 @@
-import { TechEvent } from "@/modules/events";
+import { EventAttendee, TechEvent } from "@/modules/events";
 
 export type GetEventListParams = {
   start?: string;
@@ -12,4 +12,8 @@ export type GetEventListResponse = {
     total_page: number;
     total: number;
   };
+};
+
+export type GetEventAttendeeListResponse = {
+  data: Array<EventAttendee>;
 };

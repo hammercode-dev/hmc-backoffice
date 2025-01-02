@@ -23,3 +23,20 @@ export interface TechEvent {
   attendee: number;
   capacity: number;
 }
+
+export interface EventAttendee {
+  id: number
+  name: string
+  email: string
+  phone?: string | null
+  attend_at?: string | null
+  registered_at: string
+  payment: {
+    ref_id?: string
+    method: 'flip' | 'manual_transfer' | 'cash' | 'free'
+    file_url?: string | null
+    amount: number
+    status: 'pending' | 'paid'
+    paid_at?: string | null
+  }
+}

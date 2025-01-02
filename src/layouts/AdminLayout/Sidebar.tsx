@@ -40,9 +40,6 @@ export default function Sidebar({ user, unpaid, onLogout }: SidebarProps) {
         <li className="">
           <MenuLink to="/admin/events">Acara</MenuLink>
         </li>
-        <li className="">
-          <MenuLink to="#">Event</MenuLink>
-        </li>
         <li>
           <MenuLink to="#">CRM</MenuLink>
         </li>
@@ -50,7 +47,7 @@ export default function Sidebar({ user, unpaid, onLogout }: SidebarProps) {
           <MenuLink to="#">User</MenuLink>
         </li>
         <li className="">
-          <MenuLink to="/admin/billing">
+          <MenuLink to="/admin/payments">
             Pembayaran <Badge count={unpaid} />
           </MenuLink>
         </li>

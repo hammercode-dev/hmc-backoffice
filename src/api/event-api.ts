@@ -1,5 +1,5 @@
-import { TechEvent } from "@/modules/events";
-import { GetEventListParams, GetEventListResponse } from "./event-api.types";
+import { EventAttendee, TechEvent } from "@/modules/events";
+import { GetEventAttendeeListResponse, GetEventListParams, GetEventListResponse } from "./event-api.types";
 
 const events: TechEvent[] = [
   {
@@ -66,6 +66,51 @@ const events: TechEvent[] = [
   },
 ];
 
+const attendees: EventAttendee[] = [
+  {
+    id: 1,
+    name: 'John Doe',
+    email: 'john@gmail.com',
+    registered_at: '2025-01-01T00:00:00.000Z',
+    payment: {
+      ref_id: '123',
+      method: 'manual_transfer',
+      file_url: 'https://img.com',
+      amount: 20000,
+      status: 'paid',
+      paid_at: '2025-01-01T00:00:00.000Z',
+    }
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    email: 'Jane@gmail.com',
+    registered_at: '2025-01-01T00:00:00.000Z',
+    payment: {
+      ref_id: '123',
+      method: 'manual_transfer',
+      file_url: 'https://img.com',
+      amount: 20000,
+      status: 'paid',
+      paid_at: '2025-01-01T00:00:00.000Z',
+    }
+  },
+  {
+    id: 2,
+    name: 'Jane Doe',
+    email: 'Jane@gmail.com',
+    registered_at: '2025-01-01T00:00:00.000Z',
+    payment: {
+      ref_id: '123',
+      method: 'free',
+      file_url: '',
+      amount: 0,
+      status: 'paid',
+      paid_at: '2025-01-01T00:00:00.000Z',
+    }
+  }
+]
+
 export const eventApi = {
   getAll(params: GetEventListParams): Promise<GetEventListResponse> {
     return Promise.resolve({
@@ -78,4 +123,10 @@ export const eventApi = {
       },
     });
   },
+  getAttendees(id: string): Promise<GetEventAttendeeListResponse> {
+    console.log('Request get attendees for event: ', id)
+    return Promise.resolve({
+      data: attendees,
+    })
+  }
 } as const;
