@@ -24,6 +24,12 @@ export interface TechEvent {
   capacity: number;
 }
 
+export interface TechEventLog {
+  id: number;
+  description: string;
+  created_at: string;
+}
+
 export interface EventAttendee {
   id: number
   name: string

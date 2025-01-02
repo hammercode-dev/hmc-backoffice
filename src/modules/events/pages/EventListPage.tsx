@@ -83,12 +83,15 @@ function EventsTable({ events }: { events: TechEvent[] }) {
     {
       title: "Aksi",
       render: (event: TechEvent) => (
-        <Flex gap={10}>
+        <Flex gap={8}>
           <Button size="small" type="primary">
             <Link to={`/admin/events/${event.id}/edit`}>Edit</Link>
           </Button>
           <Button size="small">
             <Link to={`/admin/events/${event.id}/view`}>Lihat</Link>
+          </Button>
+          <Button size="small" type={event.is_published ? "default" : "primary"}>
+            {event.is_published ? "Un-publish" :"Publish"}
           </Button>
         </Flex>
       ),

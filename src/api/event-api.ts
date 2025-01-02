@@ -12,7 +12,7 @@ const events: TechEvent[] = [
     end_date: "2025-01-03T16:00:00.000Z",
     slug: "golang-and-flutter-workshop",
     price: 0,
-    is_published: true,
+    is_published: false,
     is_online: false,
     description: 'lorem',
     type: 'techtalk',
