@@ -27,6 +27,8 @@ export interface TechEvent {
 export interface TechEventLog {
   id: number;
   description: string;
+  type: 'payment' | 'management' | 'attendance' | 'notification';
+  actor: { id?: number, name: string, email: string };
   created_at: string;
 }
 
