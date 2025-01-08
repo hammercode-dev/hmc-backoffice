@@ -52,7 +52,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         <Input type="password" name="password" full />
       </div>
       <div className="text-right">
-        <Button type="submit" disabled={isLoggingIn}>
+        <Button type="submit" disabled={isLoggingIn} className="w-full bg-hmc-dark-500 hover:bg-hmc-dark-600 text-white py-1 rounded-lg">
           Login
         </Button>
       </div>

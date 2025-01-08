@@ -9,10 +9,10 @@ export default function LoginPage() {
   }, [navigate]);
 
   return (
-    <div style={{ width: 400 }} className="py-32 mx-auto ">
-      <main className="bg-orange-50 rounded-lg px-6 pt-8 pb-4 shadow-md mb-6">
-        <h1 className="mb-4 font-bold text-center text-2xl">
-          Hammercode Backoffice
+    <div className="flex w-full justify-center items-center h-screen">
+      <main className="bg-white rounded-xl p-8 shadow-md mb-6 border">
+        <h1 className="mb-4 font-bold text-2xl">
+          Hammercode <span className="text-hmc-base-500">Backoffice</span>
         </h1>
         <LoginForm onSuccess={handleLoginSuccess} />
       </main>
