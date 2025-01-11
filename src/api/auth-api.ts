@@ -2,7 +2,7 @@ import { User } from "../modules/auth/auth.entity";
 import http from "./axios";
 
 export type LoginResponse = {
-  accessToken: string,
+  data: string,
   user: User,
 }
 
@@ -21,6 +21,9 @@ export const authApi = {
       password,
     })
       .then(res => res.data)
+      .catch(err => {
+        throw new Error(err.response.data.message)
+      })
   },
   // login(email: string, password: string): Promise<LoginResponse> {
   //   return Promise.resolve({

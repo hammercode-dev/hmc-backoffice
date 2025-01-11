@@ -114,10 +114,12 @@ export function useAuthModule() {
       .then((result) => {
         setUserInitialized(true);
         setUserInitializing(false);
-        storage.auth.storeKey(result.accessToken);
-
+        storage.auth.storeKey(result.data);
         return result;
-      });
+      }).catch((error) => {
+        setError(error.message);
+        throw error;
+      })
   };
 
   const logout = () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 
 const http = axios.create({
   baseURL: "https://lms-be-development.hammercode.org/api/v1",
-  withCredentials: true,
+  withCredentials: false,
 });
 
 http.interceptors.request.use((config) => {
