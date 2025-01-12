@@ -25,14 +25,6 @@ export const authApi = {
         throw new Error(err.response.data.message)
       })
   },
-  // login(email: string, password: string): Promise<LoginResponse> {
-  //   return Promise.resolve({
-  //     accessToken: 'dummy-token',
-  //     user,
-  //     email,
-  //     password,
-  //   })
-  // },
   getUser(): Promise<ProfileResponse> {
     return Promise.resolve(user)
   },

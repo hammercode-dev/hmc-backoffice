@@ -1,1 +1,14 @@
-export const theme = {};
+export const theme = {
+    token: {
+        colorPrimary: '#1F4C8F',
+    },
+    components: {
+        Button: {
+            algorithm: true,
+            borderRadius: 8,
+            controlHeight: 40,
+            fontSize: 16,
+            paddingContentHorizontal: 16,
+        },
+    },
+};

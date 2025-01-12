@@ -1,8 +1,9 @@
 import { FormEventHandler, useCallback, useState } from "react";
 import { useAuthModule } from "../auth.slice";
 import { Navigate } from "react-router-dom";
-import { Button, Input, Label } from "@/components";
+import { Input, Label } from "@/components";
 import { Alert } from "@/components";
+import { Button } from "antd";
 
 type LoginFields = {
   email: HTMLInputElement;
@@ -52,7 +53,7 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
         <Input type="password" name="password" full />
       </div>
       <div className="text-right">
-        <Button type="submit" disabled={isLoggingIn} className="w-full bg-hmc-dark-500 hover:bg-hmc-dark-600 text-white py-1 rounded-lg">
+        <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ width: "100%" }}>
           Login
         </Button>
       </div>
