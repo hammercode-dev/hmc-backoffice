@@ -2,8 +2,8 @@ import { storage } from "@/utils/storage";
 import axios from "axios";
 
 const http = axios.create({
-  baseURL: "https://api.hammercode.org/api/v1/admin",
-  withCredentials: true,
+  baseURL: "https://lms-be-development.hammercode.org/api/v1",
+  withCredentials: false,
 });
 
 http.interceptors.request.use((config) => {

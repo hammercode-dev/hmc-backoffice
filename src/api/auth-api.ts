@@ -1,8 +1,8 @@
 import { User } from "../modules/auth/auth.entity";
-// import http from "./axios";
+import http from "./axios";
 
 export type LoginResponse = {
-  accessToken: string,
+  data: string,
   user: User,
 }
 
@@ -15,20 +15,15 @@ const user: User = {
 }
 
 export const authApi = {
-  // login(email: string, password: string): Promise<LoginResponse> {
-  //   return http.post('/auth/login', {
-  //     username: email,
-  //     password,
-  //   })
-  //     .then(res => res.data);
-  // },
   login(email: string, password: string): Promise<LoginResponse> {
-    return Promise.resolve({
-      accessToken: 'dummy-token',
-      user,
+    return http.post('/auth/login', {
       email,
       password,
     })
+      .then(res => res.data)
+      .catch(err => {
+        throw new Error(err.response.data.message)
+      })
   },
   getUser(): Promise<ProfileResponse> {
     return Promise.resolve(user)
