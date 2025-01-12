@@ -1,36 +1,34 @@
-import { FormEventHandler, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useAuthModule } from "../auth.slice";
 import { Navigate } from "react-router-dom";
-import { Input, Label } from "@/components";
-import { Alert } from "@/components";
-import { Button } from "antd";
-
-type LoginFields = {
-  email: HTMLInputElement;
-  password: HTMLInputElement;
-};
+import { Alert, Button, Form, Input } from "antd";
+import { type FormProps } from "antd";
 
 type LoginFormProps = {
   onSuccess?: () => void;
 };
 
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
 export default function LoginForm({ onSuccess }: LoginFormProps) {
   const auth = useAuthModule();
   const [isLoggingIn, setLogginIn] = useState<boolean>(false);
+  const [form] = Form.useForm();
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = useCallback(
-    (event) => {
-      event.preventDefault();
-      const form = event.target as typeof event.target & LoginFields;
+  const onFinish: FormProps<LoginFormValues>["onFinish"] = useCallback(
+    (values: LoginFormValues) => {
       setLogginIn(true);
       auth
-        .login({ email: form.email.value, password: form.password.value })
+        .login({ email: values.email, password: values.password })
         .then(onSuccess)
         .finally(() => {
           setLogginIn(false);
         });
     },
-    [auth, onSuccess],
+    [auth, onSuccess]
   );
 
   if (auth.hasAuthKey()) {
@@ -38,25 +36,49 @@ export default function LoginForm({ onSuccess }: LoginFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form
+      form={form}
+      onFinish={onFinish}
+      layout="vertical"
+      autoComplete="off"
+    >
       {auth.error?.message && (
         <div className="mb-4">
-          <Alert variant="danger" message={auth.error.message} />
+          <Alert message={auth.error.message} type="error" showIcon />
         </div>
       )}
-      <div className="block mb-2">
-        <Label>Email</Label>
-        <Input type="email" name="email" full />
-      </div>
-      <div className="block mb-4">
-        <Label>Password</Label>
-        <Input type="password" name="password" full />
-      </div>
-      <div className="text-right">
-        <Button type="primary" htmlType="submit" loading={isLoggingIn} style={{ width: "100%" }}>
+
+      <Form.Item
+        label="Email"
+        name="email"
+        rules={[
+          { required: true, message: "Please input your email!" },
+          { type: "email", message: "Please enter a valid email!" }
+        ]}
+      >
+        <Input />
+      </Form.Item>
+
+      <Form.Item
+        label="Password"
+        name="password"
+        rules={[
+          { required: true, message: "Please input your password!" },
+        ]}
+      >
+        <Input.Password />
+      </Form.Item>
+
+      <Form.Item>
+        <Button
+          type="primary"
+          htmlType="submit"
+          loading={isLoggingIn}
+          style={{ width: "100%" }}
+        >
           Login
         </Button>
-      </div>
-    </form>
+      </Form.Item>
+    </Form>
   );
 }
