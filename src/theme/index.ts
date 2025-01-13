@@ -1,6 +1,7 @@
 export const theme = {
     token: {
         colorPrimary: '#1F4C8F',
+        fontFamily: '"Sora", "ui-sans-serif", "system-ui"', 
     },
     components: {
         Button: {
