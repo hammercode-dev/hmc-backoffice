@@ -7,12 +7,6 @@ export type LoginResponse = {
 }
 
 export type ProfileResponse = User;
-const user: User = {
-  id: 'e3re-2joi-98r1',
-  name: 'John Doe',
-  email: 'johndoe@gmail.com',
-  role: 'admin'
-}
 
 export const authApi = {
   login(email: string, password: string): Promise<LoginResponse> {
@@ -26,6 +20,6 @@ export const authApi = {
       })
   },
   getUser(): Promise<ProfileResponse> {
-    return Promise.resolve(user)
-  },
+    return http.get('/user').then(res => res.data.data)
+  }
 };

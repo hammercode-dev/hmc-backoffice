@@ -33,7 +33,7 @@ export default function Sidebar({ user, unpaid, onLogout }: SidebarProps) {
       <div className="px-8 py-8">
         <img alt="hammercode logo" src={logo} style={{ width: 48, height: 48 }} />
         <h1 className="font-bold text-lg mb-4">{productTitle}</h1>
-        <p className="mb-8">Hi, {user?.name}</p>
+        <p className="mb-8">Hi, {user?.username}</p>
       </div>
 
       <ul className="px-4">

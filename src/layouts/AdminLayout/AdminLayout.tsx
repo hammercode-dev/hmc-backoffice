@@ -14,7 +14,7 @@ export default function AdminLayout() {
     if (!auth.isInitialized) {
       auth.initialize();
     }
-  }, [auth]);
+  }, [auth.isInitialized]);
 
   if (auth.isInitializing) {
     return <p>Please wait...</p>;
