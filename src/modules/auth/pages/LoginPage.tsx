@@ -10,7 +10,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex w-full justify-center items-center h-screen">
-      <main className="bg-white rounded-xl p-10 shadow-md mb-6 border lg:w-1/4 md:w-1/3 w-full mx-4">
+      <main className="bg-white rounded-2xl p-10 shadow-lg mb-6 border-gray-300 border-1 lg:w-1/4 md:w-1/3 w-full mx-4">
         <h1 className="font-bold text-2xl">
           HMC <span className="text-hmc-base-500 mb-4">Backoffice</span>
         </h1>
