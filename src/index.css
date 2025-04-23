@@ -1,5 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sora:wght@100..800&display=swap");
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Sora", "ui-sans-serif", "system-ui";
+
+  --color-hmc-base-100: #E0F7FF;
+  --color-hmc-base-200: #B3ECFF;
+  --color-hmc-base-300: #80E1FF;
+  --color-hmc-base-400: #4DD6FF;
+  --color-hmc-base-500: #1ACBFF;
+  --color-hmc-base-600: #00C0FF;
+
+  --color-hmc-dark-100: #D0D7E5;
+  --color-hmc-dark-200: #A1AFCB;
+  --color-hmc-dark-300: #7187B0;
+  --color-hmc-dark-400: #425096;
+  --color-hmc-dark-500: #1F4C8F;
+  --color-hmc-dark-600: #003366;
+}

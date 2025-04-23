@@ -59,7 +59,7 @@ export default function Sidebar({
           <h1 className={`font-bold text-lg mb-4 ${collapsed && "hidden"}`}>
             {productTitle}
           </h1>
-          <p className={`mb-8 ${collapsed && "hidden"}`}>Hi, {user?.name}</p>
+          <p className={`mb-8 ${collapsed && "hidden"}`}>Hi, {user?.username}</p>
         </div>
 
         <ul>
